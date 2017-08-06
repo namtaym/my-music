@@ -1,5 +1,4 @@
 <template>
-  <transition  name="slide-fade">
   <div v-if="track" class="details-container">
     <div class="details-header">
       <h2 class="artist">{{track.artist}}</h2>
@@ -14,7 +13,6 @@
       </div>
     </div>
   </div>
-  </transition>
 </template>
 
 <script>
@@ -27,19 +25,19 @@
         commentHeader: 'Comments'
       }
     },
-    methods:{
+    methods: {
       saveComment(){
-        this.$emit("updateComment", this.track);
+        this.$emit("updateComment", this.track)
       },
       shareOpinion(){
-        if(this.track.comment && this.track.comment.length) {
+        if (this.track.comment && this.track.comment.length) {
           window.open(
             "https://twitter.com/",
             '_blank'
           );
         }
         else {
-          alert("Your comment is empty");
+          alert("Your comment is empty")
         }
       }
     }
@@ -48,38 +46,30 @@
 </script>
 
 <style scoped>
-  .slide-fade-enter-active {
-    transition: all .3s ease;
-  }
-  .slide-fade-leave-active {
-    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-  }
-  .slide-fade-enter, .slide-fade-leave-to
-  {
-    transform: translateX(10px);
-    opacity: 0;
-  }
-  .details-container{
+  .details-container {
     align-items: center;
     text-align: left;
     vertical-align: middle;
   }
 
-  .details-header{
+  .details-header {
 
   }
-  .artist, .name{
+
+  .artist, .name {
     display: inline-block;
   }
-  .name{
+
+  .name {
     padding: 0 20px;
     font-weight: lighter;
   }
 
-  .details-info{
+  .details-info {
     display: block;
   }
-  .album-img{
+
+  .album-img {
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 5px;
@@ -91,16 +81,19 @@
     height: 150px;
     padding: 0 44px;
   }
-  .comment-header{
+
+  .comment-header {
     vertical-align: top;
     padding-bottom: 30px;
     font-size: 18px;
   }
-  .twitter-icon{
+
+  .twitter-icon {
     padding: 30px;
     cursor: pointer;
   }
-  textarea{
+
+  textarea {
     font-size: 16px;
     display: inline-block;
     width: 500px;

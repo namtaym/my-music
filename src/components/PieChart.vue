@@ -1,5 +1,5 @@
 <template>
-  <div id="chart"></div>
+  <div :id="chartId"></div>
 </template>
 
 <script>
@@ -9,8 +9,9 @@
     name: 'pie-chart',
     props: ['chartData'],
     data () {
+      let chartId = 'chart' + Math.floor((Math.random() * 10) + 1);
       return {
-        chartId: 'chart',
+        chartId: chartId,
         header: "pie",
         chart: undefined
       }
@@ -18,28 +19,39 @@
 
     mounted () {
       this.chartConfig = {
+        bindto: "#" + this.chartId,
         data: {
-          bindto: "#chart",
           columns: [],
-          type : 'pie',
+          type: 'pie',
           onclick: function (d, i) { },
           onmouseover: function (d, i) { },
-          onmouseout: function (d, i) { }
+          onmouseout: function (d, i) { },
+
+        },
+        legend: {
+          hide: true
+        },
+        pie: {
+          label: {
+            format: function (value, ratio, id) {
+              return id;
+            }
+          }
         }
       };
 
     },
 
     watch: {
-      chartData: function (newData){
+      chartData: function (newData) {
         this.chartConfig.data.columns = newData
         c3.generate(this.chartConfig)
-        }
-      },
+      }
+    },
   }
 </script>
 
-<style >
+<style scoped>
   h1, h2 {
     font-weight: normal;
   }
@@ -53,6 +65,7 @@
     display: inline-block;
     margin: 0 10px;
   }
+
   a {
     color: #42b983;
   }

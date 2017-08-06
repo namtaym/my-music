@@ -13,7 +13,7 @@
   import Grid from './Grid'
 
   export default {
-    components: { Grid },
+    components: {Grid},
     name: 'songs-list',
     props: ["songsList"],
     data () {
@@ -32,7 +32,7 @@
 
     methods: {
       showDetails(data){
-        this.$emit('showDetails',data)
+        this.$emit('showDetails', data)
       }
     }
   }

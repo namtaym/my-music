@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     <div class="tbl-header">
       <table cellpadding="0" cellspacing="0" border="0">
         <thead>
@@ -21,6 +21,7 @@
         <tr v-for="entry in filteredData">
           <td v-for="(value, key) in columns" v-on:click="selectItem(entry)">
             {{entry[key]}}
+
           </td>
         </tr>
         </tbody>
