@@ -2,8 +2,9 @@ import axios from 'axios'
 
 
 export default class MusicDataService{
+
   getPlayList(){
-    let api = axios.create( {baseURL:`http://jsonplaceholder.typicode.com`,
+    let api = axios.create( {baseURL:`https://vest-test-task.herokuapp.com`,
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
@@ -11,7 +12,7 @@ export default class MusicDataService{
         'Access-Control-Allow-Origin': '*'
       }}
     )
-   return api.get("posts");
+   return api.get("playlist");
   }
 
   getMockedPlayList(){
@@ -66,6 +67,12 @@ export default class MusicDataService{
   }
 
   getAlbumImage(trackId){
-      return "https://e-cdns-images.dzcdn.net/images/cover/4fbc04e5bf54f9884ea97497150254ef/264x264-000000-80-0-0.jpg"
+   let images = [
+      "http://www.udiscovermusic.com/wp-content/uploads/2015/10/Eat-a-Peach.jpg",
+      "http://assets8.radiox.co.uk/2013/24/the-xx---xx-1371817761-hero-promo-0.jpg",
+      "https://cdn.pastemagazine.com/www/blogs/lists/2010/12/13/klaxxons_surfing_the_void.jpg",
+      "https://e-cdns-images.dzcdn.net/images/cover/4fbc04e5bf54f9884ea97497150254ef/264x264-000000-80-0-0.jpg"
+    ];
+      return  images[Math.floor(Math.random()*images.length)];
   }
 }

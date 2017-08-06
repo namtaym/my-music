@@ -21,7 +21,6 @@
         <tr v-for="entry in filteredData">
           <td v-for="(value, key) in columns" v-on:click="selectItem(entry)">
             {{entry[key]}}
-
           </td>
         </tr>
         </tbody>
@@ -103,7 +102,7 @@
     text-align: left;
     vertical-align: middle;
     font-weight: 300;
-    font-size: 12px;
+    font-size: 16px;
     color: #fff;
     border-bottom: solid 1px rgba(255, 255, 255, 0.1);
   }
@@ -112,7 +111,7 @@
     padding: 20px 15px;
     text-align: left;
     font-weight: 500;
-    font-size: 12px;
+    font-size: 20px;
     color: #fff;
   }
 

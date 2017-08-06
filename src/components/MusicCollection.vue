@@ -1,6 +1,6 @@
 <template>
   <div>
-  <h1>{{header}}</h1>
+  <h1>{{header}}<span class="chart-icon" @click="showStatistics()" title="Show Music Statistics"><img src="../assets/chart-pie.png" alt=""></span></h1>
     <songs-list v-on:showDetails="showDetails($event)" :songsList="songsList"></songs-list>
     <track-details :track="selectedTrack" v-on:updateComment="updateComment($event)"></track-details>
   </div>
@@ -26,7 +26,7 @@
     created() {
       const dataService = new MusicDataService()
       dataService.getPlayList().then(response => {
-      this.songsList = dataService.getMockedPlayList().map(item => {
+      this.songsList = response.map(item => {
         return new TrackViewModel(item.artist, item.genre, item.last_played, item.name, item.stars);
       })
      }
@@ -42,6 +42,10 @@
       updateComment(track){
         const dataService = new MusicDataService();
         dataService.saveComment(track.comment, track.id);
+      },
+      showStatistics(){
+        debugger;
+        this.$router.push('statistic')
       }
     }
   }
@@ -49,7 +53,8 @@
 
 <style scoped>
   h1, h2 {
-    font-weight: normal;
+    font-weight: bolder;
+    font-family: 'Comfortaa', cursive;
   }
 
   ul {
@@ -63,5 +68,10 @@
   }
   a {
     color: #42b983;
+  }
+
+  .chart-icon{
+    margin: 10px;
+    cursor: pointer;
   }
 </style>
