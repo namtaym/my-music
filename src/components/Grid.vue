@@ -1,24 +1,33 @@
 <template>
-    <table>
-    <thead>
-    <tr>
-      <th v-for="(value, key) in columns"
-          @click="sortBy(key)"
-          :class="{ active: sortKey == key }">
-        {{ value}}
+  <div >
+    <div class="tbl-header">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <thead>
+        <tr class="tbl-header">
+          <th v-for="(value, key) in columns"
+              @click="sortBy(key)"
+              :class="{ active: sortKey == key }">
+            {{ value}}
           <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
           </span>
-      </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr v-for="entry in filteredData">
-      <td v-for="(value, key) in columns">
-        {{entry[key]}}
-      </td>
-    </tr>
-    </tbody>
-  </table>
+          </th>
+        </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="tbl-content">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tbody>
+        <tr v-for="entry in filteredData">
+          <td v-for="(value, key) in columns" v-on:click="selectItem(entry)">
+            {{entry[key]}}
+
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </template>
 <script>
 
@@ -27,7 +36,7 @@
     props: ["data", "columns"],
     data: function () {
       var sortOrders = {}
-       for(let key in this.columns){
+      for (let key in this.columns) {
         sortOrders[key] = 1
       }
       return {
@@ -63,41 +72,48 @@
       sortBy: function (key) {
         this.sortKey = key
         this.sortOrders[key] = this.sortOrders[key] * -1
+      },
+      selectItem(item){
+        this.$emit('select', item);
       }
     }
   }
 </script>
 
 <style scoped>
-  body {
-    font-family: Helvetica Neue, Arial, sans-serif;
-    font-size: 14px;
-    color: #444;
-  }
-
   table {
-    border: 2px solid #42b983;
-    border-radius: 3px;
-    background-color: #fff;
+    width: 100%;
+    table-layout: fixed;
   }
 
-  th {
-    background-color: #42b983;
-    color: rgba(255, 255, 255, 0.66);
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+  .tbl-header {
+    padding-right: 6px;
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .tbl-content {
+    height: 300px;
+    overflow-x: auto;
+    margin-top: 0px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
   }
 
   td {
-    background-color: #f9f9f9;
+    padding: 15px;
+    text-align: left;
+    vertical-align: middle;
+    font-weight: 300;
+    font-size: 12px;
+    color: #fff;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.1);
   }
 
-  th, td {
-    min-width: 120px;
-    padding: 10px 20px;
+  th {
+    padding: 20px 15px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 12px;
+    color: #fff;
   }
 
   th.active {
@@ -128,5 +144,4 @@
     border-right: 4px solid transparent;
     border-top: 4px solid #fff;
   }
-
 </style>

@@ -55,4 +55,17 @@ export default class MusicDataService{
 
     return playList;
   }
+
+  saveComment(text, storageKey){
+    localStorage.setItem(storageKey, text);
+  }
+
+  fetchComment(trackId){
+    let comment = localStorage.getItem(trackId) || '';
+    return comment;
+  }
+
+  getAlbumImage(trackId){
+      return "https://e-cdns-images.dzcdn.net/images/cover/4fbc04e5bf54f9884ea97497150254ef/264x264-000000-80-0-0.jpg"
+  }
 }
