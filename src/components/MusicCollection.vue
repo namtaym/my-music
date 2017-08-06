@@ -26,7 +26,7 @@
     created() {
       const dataService = new MusicDataService()
       dataService.getPlayList().then(response => {
-      this.songsList = response.map(item => {
+      this.songsList = response.data.map(item => {
         return new TrackViewModel(item.artist, item.genre, item.last_played, item.name, item.stars);
       })
      }
@@ -44,7 +44,6 @@
         dataService.saveComment(track.comment, track.id);
       },
       showStatistics(){
-        debugger;
         this.$router.push('statistic')
       }
     }
@@ -52,10 +51,6 @@
 </script>
 
 <style scoped>
-  h1, h2 {
-    font-weight: bolder;
-    font-family: 'Comfortaa', cursive;
-  }
 
   ul {
     list-style-type: none;
@@ -70,8 +65,5 @@
     color: #42b983;
   }
 
-  .chart-icon{
-    margin: 10px;
-    cursor: pointer;
-  }
+
 </style>

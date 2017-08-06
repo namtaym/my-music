@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{header}}</h1>
+    <h1>{{header}}<span class="chart-icon" @click="backToPlayList()" title="Back to My Music"><img src="../assets/undo.png" alt=""></span></h1>
     <h2>Genre</h2>
     <pie-chart :chart-data="statisticInfoByGenre"></pie-chart>
   <!--  <h2>Stars</h2>
@@ -24,14 +24,18 @@
         statisticInfoByStars: [],
       }
     },
-
     created(){
-      const dataService = new MusicDataService()
+     const dataService = new MusicDataService()
      dataService.getPlayList().then(response => {
-       let songsList = response;
+       let songsList = response.data;
        this.statisticInfoByStars = new StatisticInfoModel(songsList,'stars').info;
        this.statisticInfoByGenre = new StatisticInfoModel(songsList,'genre').info;
       })
+    },
+    methods:{
+      backToPlayList(){
+        this.$router.push('/')
+      }
     }
   }
 </script>

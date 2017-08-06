@@ -25,6 +25,16 @@ export default {
     background: linear-gradient(to right, #25c481, #25b7c4);
     font-family: 'Roboto', sans-serif;
   }
+
+  h1, h2 {
+    font-weight: bolder;
+    font-family: 'Comfortaa', cursive;
+  }
+  .chart-icon{
+    margin: 10px;
+    cursor: pointer;
+  }
+
   .content {
     margin: 10px;
   }
