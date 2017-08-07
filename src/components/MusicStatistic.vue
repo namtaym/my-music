@@ -22,13 +22,14 @@
   import StatisticInfoModel from '../view-models/statistic-info-model'
   import PieChart from './PieChart'
   import ErrorMessage from './ErrorMessage.vue'
+  const dataService = new MusicDataService()
 
   export default {
     components: {PieChart, ErrorMessage},
     name: 'musicStatistics',
     data () {
       return {
-        header: "Your Music Statistics",
+        header: 'Your Music Statistics',
         songsList: [],
         statisticInfoByGenre: [],
         statisticInfoByStars: [],
@@ -36,7 +37,6 @@
       }
     },
     created(){
-      const dataService = new MusicDataService()
       dataService.getPlayList().then(response => {
         let songsList = response.data
         this.statisticInfoByStars = new StatisticInfoModel(songsList, 'stars').info

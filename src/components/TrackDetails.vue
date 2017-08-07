@@ -19,7 +19,7 @@
 
   export default {
     name: 'track-details',
-    props: ["track"],
+    props: ['track'],
     data () {
       return {
         commentHeader: 'Comments'
@@ -27,17 +27,17 @@
     },
     methods: {
       saveComment(){
-        this.$emit("updateComment", this.track)
+        this.$emit('updateComment', this.track)
       },
       shareOpinion(){
         if (this.track.comment && this.track.comment.length) {
           window.open(
-            "https://twitter.com/",
+            'https://twitter.com/',
             '_blank'
           );
         }
         else {
-          alert("Your comment is empty")
+          alert('Your comment is empty')
         }
       }
     }
@@ -50,10 +50,6 @@
     align-items: center;
     text-align: left;
     vertical-align: middle;
-  }
-
-  .details-header {
-
   }
 
   .artist, .name {

@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <transition appear name="flip" mode="out-in">
       <h1>{{header}}<span class="chart-icon" @click="showStatistics()" title="Show Music Statistics"><img
         src="../assets/chart-pie.png" alt=""></span></h1>
@@ -12,8 +11,11 @@
       <songs-list v-if="songsList" v-on:showDetails="showDetails($event)" :songsList="songsList"></songs-list>
     </transition>
 
-    <track-details v-if="selectedTrack" :track="selectedTrack"
-                   v-on:updateComment="updateComment($event)"></track-details>
+    <transition appear name="slide-fade" mode="out-in">
+      <track-details v-if="selectedTrack" :track="selectedTrack"
+                     v-on:updateComment="updateComment($event)"></track-details>
+    </transition>
+
   </div>
 </template>
 
@@ -25,19 +27,20 @@
   import TrackDetailsViewModel from '../view-models/track-details-view-model'
   import ErrorMessage from './ErrorMessage.vue'
 
+  const dataService = new MusicDataService()
+
   export default {
     components: {SongsList, TrackDetails, ErrorMessage},
     name: 'musicCollection',
     data () {
       return {
-        header: "My Music",
+        header: 'My Music',
         songsList: undefined,
         selectedTrack: undefined,
         serverError: false
       }
     },
     created() {
-      const dataService = new MusicDataService()
       dataService.getPlayList().then(response => {
           this.songsList = response.data.map(item => {
             return new TrackViewModel(item.artist, item.genre, item.last_played, item.name, item.stars)
@@ -49,10 +52,10 @@
     },
     methods: {
       showDetails(data){
+        this.selectedTrack = undefined;
         this.selectedTrack = new TrackDetailsViewModel(data)
       },
       updateComment(track){
-        const dataService = new MusicDataService()
         dataService.saveComment(track.comment, track.id)
       },
       showStatistics(){
@@ -61,22 +64,3 @@
     }
   }
 </script>
-
-<style scoped>
-
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-
-  li {
-    display: inline-block;
-    margin: 0 10px;
-  }
-
-  a {
-    color: #42b983;
-  }
-
-
-</style>

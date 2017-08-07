@@ -21,7 +21,6 @@
         <tr v-for="entry in filteredData">
           <td v-for="(value, key) in columns" v-on:click="selectItem(entry)">
             {{entry[key]}}
-
           </td>
         </tr>
         </tbody>
@@ -33,7 +32,7 @@
 
   export default {
     name: 'grid',
-    props: ["data", "columns"],
+    props: ['data', 'columns'],
     data: function () {
       var sortOrders = {}
       for (let key in this.columns) {
@@ -48,7 +47,7 @@
       filteredData: function () {
         var sortKey = this.sortKey
         var data = this.data
-        var filterKey = "";
+        var filterKey = '';
         var order = this.sortOrders[sortKey] || 1
 
         if (filterKey) {
@@ -91,6 +90,14 @@
     background-color: rgba(255, 255, 255, 0.3);
   }
 
+  tr:nth-child(even) {
+    background-color: #25c481;
+  }
+
+  tr:nth-child(even) {
+    background-color: #25b7c4;
+  }
+
   .tbl-content {
     height: 300px;
     overflow-x: auto;
@@ -131,17 +138,18 @@
     height: 0;
     margin-left: 5px;
     opacity: 0.66;
+
   }
 
   .arrow.asc {
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-bottom: 4px solid #fff;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #fff;
   }
 
   .arrow.dsc {
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-top: 4px solid #fff;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #fff;
   }
 </style>
